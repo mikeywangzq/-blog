@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { postService } from '../services/postService';
 import { authService } from '../services/authService';
 import { formatDate } from '../utils/formatDate';
+import CommentSection from '../components/CommentSection';
+import LikeButton from '../components/LikeButton';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -73,8 +76,8 @@ const PostDetail = () => {
           </div>
         )}
 
-        <div className="post-content" style={{ marginTop: '2rem' }}>
-          {post.content}
+        <div className="post-content markdown-preview" style={{ marginTop: '2rem' }}>
+          <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
 
         {post.tags && (
@@ -83,6 +86,12 @@ const PostDetail = () => {
             {post.tags}
           </div>
         )}
+
+        <div style={{ marginTop: '2rem', padding: '1rem 0', borderTop: '1px solid #eee' }}>
+          <LikeButton postId={post.id} />
+        </div>
+
+        <CommentSection postId={post.id} />
       </div>
     </div>
   );
