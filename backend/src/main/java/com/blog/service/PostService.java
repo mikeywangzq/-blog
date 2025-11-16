@@ -6,6 +6,8 @@ import com.blog.model.Category;
 import com.blog.model.Post;
 import com.blog.model.User;
 import com.blog.repository.CategoryRepository;
+import com.blog.repository.CommentRepository;
+import com.blog.repository.LikeRepository;
 import com.blog.repository.PostRepository;
 import com.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final CommentRepository commentRepository;
+    private final LikeRepository likeRepository;
 
     @Transactional(readOnly = true)
     public Page<PostDTO> getAllPublishedPosts(Pageable pageable) {
@@ -145,6 +149,10 @@ public class PostService {
             dto.setCategoryId(post.getCategory().getId());
             dto.setCategoryName(post.getCategory().getName());
         }
+
+        // 添加评论数和点赞数
+        dto.setCommentCount(commentRepository.countByPostIdAndDeletedFalse(post.getId()));
+        dto.setLikeCount(likeRepository.countByPostId(post.getId()));
 
         return dto;
     }
