@@ -13,6 +13,8 @@ const PostCard = ({ post }) => {
         {post.categoryName && <span> · 分类: {post.categoryName}</span>}
         <span> · {formatDate(post.createdAt)}</span>
         <span> · 浏览: {post.views}</span>
+        {post.commentCount !== undefined && <span> · 评论: {post.commentCount}</span>}
+        {post.likeCount !== undefined && <span> · 点赞: {post.likeCount}</span>}
       </div>
       {post.summary && (
         <p className="post-summary">{post.summary}</p>
