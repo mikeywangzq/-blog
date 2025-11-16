@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { postService } from '../services/postService';
 import { categoryService } from '../services/categoryService';
+import MarkdownEditor from '../components/MarkdownEditor';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -110,14 +111,10 @@ const CreatePost = () => {
         </div>
 
         <div className="form-group">
-          <label>内容 *</label>
-          <textarea
-            name="content"
+          <label>内容 * (支持 Markdown)</label>
+          <MarkdownEditor
             value={formData.content}
-            onChange={handleChange}
-            className="form-control"
-            required
-            rows={15}
+            onChange={(value) => setFormData({ ...formData, content: value })}
           />
         </div>
 
