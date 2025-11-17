@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard';
 import Pagination from '../components/Pagination';
 import TagCloud from '../components/TagCloud';
 import ArchiveWidget from '../components/ArchiveWidget';
+import RssSubscribe from '../components/RssSubscribe';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -85,6 +86,7 @@ const Home = () => {
               ))}
             </ul>
           </div>
+          <RssSubscribe />
           <ArchiveWidget />
         </aside>
       </div>
