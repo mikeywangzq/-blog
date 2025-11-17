@@ -51,4 +51,20 @@ export const postService = {
     const response = await api.get('/posts/recent');
     return response.data;
   },
+
+  // 获取我的草稿
+  getMyDrafts: async (page = 0, size = 10) => {
+    const response = await api.get('/posts/drafts', {
+      params: { page, size },
+    });
+    return response.data;
+  },
+
+  // 获取我的所有文章（包括草稿和已发布）
+  getMyAllPosts: async (page = 0, size = 10) => {
+    const response = await api.get('/posts/my-posts', {
+      params: { page, size },
+    });
+    return response.data;
+  },
 };

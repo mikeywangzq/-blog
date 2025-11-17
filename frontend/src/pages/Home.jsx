@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { postService } from '../services/postService';
 import PostCard from '../components/PostCard';
 import Pagination from '../components/Pagination';
+import TagCloud from '../components/TagCloud';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -69,6 +70,10 @@ const Home = () => {
         </div>
 
         <aside>
+          <div className="sidebar" style={{ marginBottom: '2rem' }}>
+            <h3>热门标签</h3>
+            <TagCloud />
+          </div>
           <div className="sidebar">
             <h3>最新文章</h3>
             <ul>

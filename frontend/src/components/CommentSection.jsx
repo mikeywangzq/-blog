@@ -10,6 +10,7 @@ const CommentSection = ({ postId }) => {
   const [replyTo, setReplyTo] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalComments, setTotalComments] = useState(0);
   const isAuthenticated = authService.isAuthenticated();
   const currentUser = authService.getCurrentUser();
 
@@ -23,6 +24,7 @@ const CommentSection = ({ postId }) => {
       const data = await commentService.getCommentsByPostId(postId, currentPage);
       setComments(data.content);
       setTotalPages(data.totalPages);
+      setTotalComments(data.totalElements || 0);
     } catch (error) {
       console.error('加载评论失败:', error);
     } finally {
@@ -169,7 +171,7 @@ const CommentSection = ({ postId }) => {
 
   return (
     <div style={{ marginTop: '2rem' }}>
-      <h3>评论 ({comments.length})</h3>
+      <h3>评论 ({totalComments})</h3>
 
       {isAuthenticated ? (
         <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>

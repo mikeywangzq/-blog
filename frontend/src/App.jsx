@@ -6,6 +6,10 @@ import PostDetail from './pages/PostDetail';
 import CreatePost from './pages/CreatePost';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import UserProfile from './pages/UserProfile';
+import DraftsPage from './pages/DraftsPage';
+import MyFavorites from './pages/MyFavorites';
+import TagPosts from './pages/TagPosts';
 import './styles/App.css';
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
           <Route path="/edit-post/:id" element={<CreatePost />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/my-drafts" element={<DraftsPage />} />
+          <Route path="/my-favorites" element={<MyFavorites />} />
+          <Route path="/tags/:tagId" element={<TagPosts />} />
         </Routes>
       </div>
     </Router>
