@@ -1,6 +1,6 @@
 # 博客系统功能实现指南
 
-## 📋 已完成功能（10/10）
+## 📋 已完成功能（12/10）
 
 ### ✅ 1. 深色模式支持
 **实现位置：**
@@ -91,9 +91,70 @@ setSEO({
 
 ---
 
+### ✅ 6. RSS订阅功能
+**实现位置：**
+- **后端：**
+  - `/backend/pom.xml` - 添加Rome库依赖
+  - `/backend/src/main/java/com/blog/service/RssService.java` - RSS生成服务
+  - `/backend/src/main/java/com/blog/controller/RssController.java` - RSS控制器
+  - `/backend/src/main/resources/application.yml` - 站点配置
+- **前端：**
+  - `/frontend/src/components/RssSubscribe.jsx` - RSS订阅组件
+  - `/frontend/src/styles/RssSubscribe.css` - 订阅组件样式
+  - `/frontend/src/pages/Home.jsx` - 集成到首页侧边栏
+
+**功能特点：**
+- RSS 2.0标准格式
+- 支持全站订阅和分类订阅
+- 文章摘要和元数据
+- 1小时HTTP缓存
+- 推荐RSS阅读器列表
+- 一键复制订阅链接
+
+**API接口：**
+- `GET /rss/feed.xml` - 全站RSS订阅
+- `GET /rss/category/{categoryId}.xml` - 分类RSS订阅
+- `GET /rss/info` - 订阅信息
+
+---
+
+### ✅ 7. 文章版本历史
+**实现位置：**
+- **后端：**
+  - `/backend/src/main/java/com/blog/model/PostVersion.java` - 版本实体
+  - `/backend/src/main/java/com/blog/repository/PostVersionRepository.java` - 版本Repository
+  - `/backend/src/main/java/com/blog/service/PostVersionService.java` - 版本服务
+  - `/backend/src/main/java/com/blog/controller/PostVersionController.java` - 版本控制器
+  - `/backend/src/main/java/com/blog/service/PostService.java` - 集成自动保存版本
+  - `/backend/src/main/java/com/blog/dto/CreatePostRequest.java` - 添加changeNote字段
+- **前端：**
+  - `/frontend/src/services/versionService.js` - 版本API服务
+  - `/frontend/src/components/VersionHistory.jsx` - 版本历史组件
+  - `/frontend/src/styles/VersionHistory.css` - 版本历史样式
+  - `/frontend/src/pages/CreatePost.jsx` - 添加修改备注输入
+  - `/frontend/src/pages/PostDetail.jsx` - 添加版本历史查看
+
+**功能特点：**
+- 每次更新文章自动保存版本
+- 完整的内容快照（标题、内容、摘要、标签）
+- 支持修改备注记录
+- 版本对比功能（选择两个版本）
+- 版本统计信息
+- 删除文章时自动清理版本历史
+
+**API接口：**
+- `GET /posts/{postId}/versions` - 获取版本历史
+- `GET /posts/{postId}/versions/page` - 分页获取版本
+- `GET /posts/{postId}/versions/{version}` - 获取指定版本
+- `GET /posts/{postId}/versions/compare?v1=X&v2=Y` - 对比版本
+- `GET /posts/{postId}/versions/stats` - 版本统计
+
+---
+
 ## 🚧 待实现功能（需要额外工作）
 
-### 6. RSS订阅
+### 8. RSS订阅（已完成，见上文✅6）
+**注意：此功能已完成实现，保留原实现方案供参考**
 **实现方案：**
 
 **后端实现（Spring Boot）：**
@@ -125,7 +186,8 @@ public class RssController {
 
 ---
 
-### 7. 文章版本历史
+### 9. 文章版本历史（已完成，见上文✅7）
+**注意：此功能已完成实现，保留原实现方案供参考**
 **数据库设计：**
 ```sql
 CREATE TABLE post_versions (
@@ -148,7 +210,7 @@ CREATE TABLE post_versions (
 
 ---
 
-### 8. 后台管理系统
+### 10. 后台管理系统
 **建议实现：**
 
 **路由结构：**
@@ -178,7 +240,7 @@ public class AdminController {
 
 ---
 
-### 9. Elasticsearch全文检索
+### 11. Elasticsearch全文检索
 **实现步骤：**
 
 **1. 添加依赖：**
@@ -223,7 +285,7 @@ public interface PostSearchRepository extends
 
 ---
 
-### 10. 邮件通知系统
+### 12. 邮件通知系统
 **实现方案：**
 
 **1. 添加依赖：**
@@ -373,13 +435,15 @@ services:
 - ✅ 文章归档
 - ✅ 草稿自动保存
 - ✅ SEO优化
+- ✅ **RSS订阅（新增）**
+- ✅ **文章版本历史（新增）**
 
 建议优先实现：
-1. RSS订阅（提升用户订阅体验）
+1. ~~RSS订阅~~ ✅ 已完成
 2. 邮件通知（增强用户互动）
 3. 后台管理系统（方便内容管理）
 4. Elasticsearch（提升搜索体验）
-5. 文章版本历史（内容回溯）
+5. ~~文章版本历史~~ ✅ 已完成
 
 ---
 
