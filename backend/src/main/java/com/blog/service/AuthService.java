@@ -4,6 +4,8 @@ import com.blog.config.JwtUtils;
 import com.blog.dto.AuthResponse;
 import com.blog.dto.LoginRequest;
 import com.blog.dto.RegisterRequest;
+import com.blog.exception.BadRequestException;
+import com.blog.exception.ResourceNotFoundException;
 import com.blog.model.User;
 import com.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +28,11 @@ public class AuthService {
     @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("用户名已存在");
+            throw new BadRequestException("用户名已存在");
         }
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("邮箱已被注册");
+            throw new BadRequestException("邮箱已被注册");
         }
 
         User user = new User();
@@ -63,7 +65,7 @@ public class AuthService {
         String token = jwtUtils.generateToken(authentication);
 
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("用户不存在"));
+                .orElseThrow(() -> new ResourceNotFoundException("用户不存在"));
 
         return new AuthResponse(
                 token,
