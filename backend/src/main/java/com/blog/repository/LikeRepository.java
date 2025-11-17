@@ -2,6 +2,7 @@ package com.blog.repository;
 
 import com.blog.model.Like;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -15,5 +16,6 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     Boolean existsByUserIdAndPostId(Long userId, Long postId);
 
+    @Modifying
     void deleteByUserIdAndPostId(Long userId, Long postId);
 }

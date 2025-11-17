@@ -24,4 +24,6 @@ public class PostDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String tags;
+    private Long commentCount;
+    private Long likeCount;
 }

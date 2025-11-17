@@ -42,7 +42,13 @@ CREATE TABLE IF NOT EXISTS posts (
     INDEX idx_author (author_id),
     INDEX idx_category (category_id),
     INDEX idx_published (published),
-    INDEX idx_created_at (created_at)
+    INDEX idx_created_at (created_at),
+    -- 复合索引用于优化常见查询
+    INDEX idx_published_views (published, views DESC),
+    INDEX idx_published_created (published, created_at DESC),
+    INDEX idx_author_published (author_id, published),
+    -- 全文索引用于搜索
+    FULLTEXT INDEX idx_title_content (title, content)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -59,7 +65,10 @@ CREATE TABLE IF NOT EXISTS comments (
     INDEX idx_post (post_id),
     INDEX idx_user (user_id),
     INDEX idx_parent (parent_id),
-    INDEX idx_created_at (created_at)
+    INDEX idx_created_at (created_at),
+    -- 复合索引用于优化评论查询（根评论和统计）
+    INDEX idx_post_deleted_parent (post_id, deleted, parent_id),
+    INDEX idx_parent_deleted (parent_id, deleted)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS likes (

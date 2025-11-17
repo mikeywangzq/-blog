@@ -10,7 +10,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "comments", indexes = {
+    @Index(name = "idx_post", columnList = "post_id"),
+    @Index(name = "idx_user", columnList = "user_id"),
+    @Index(name = "idx_parent", columnList = "parent_id"),
+    @Index(name = "idx_created_at", columnList = "createdAt"),
+    @Index(name = "idx_post_deleted_parent", columnList = "post_id, deleted, parent_id"),
+    @Index(name = "idx_parent_deleted", columnList = "parent_id, deleted")
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
