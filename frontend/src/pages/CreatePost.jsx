@@ -19,6 +19,7 @@ const CreatePost = () => {
     categoryId: '',
     published: false,
     tags: '',
+    changeNote: '',
   });
 
   const [categories, setCategories] = useState([]);
@@ -135,6 +136,8 @@ const CreatePost = () => {
 
       if (isEdit) {
         await postService.updatePost(id, data);
+        // 清空修改备注
+        setFormData(prev => ({ ...prev, changeNote: '' }));
       } else {
         await postService.createPost(data);
       }
@@ -291,6 +294,24 @@ const CreatePost = () => {
             </div>
           )}
         </div>
+
+        {isEdit && (
+          <div className="form-group">
+            <label>修改备注（可选）</label>
+            <input
+              type="text"
+              name="changeNote"
+              value={formData.changeNote}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="简要说明本次修改内容..."
+              maxLength={200}
+            />
+            <small className="form-text text-muted">
+              记录本次修改的主要内容，方便后续查看版本历史
+            </small>
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
           <button

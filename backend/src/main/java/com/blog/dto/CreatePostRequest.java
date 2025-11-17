@@ -28,4 +28,7 @@ public class CreatePostRequest {
     private Boolean published = false;
 
     private String tags;
+
+    @Size(max = 200, message = "修改备注长度不能超过200字符")
+    private String changeNote;
 }

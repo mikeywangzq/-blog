@@ -40,6 +40,7 @@ public class PostService {
     private final CategoryRepository categoryRepository;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
+    private final PostVersionService postVersionService;
 
     /**
      * 获取所有已发布的文章（分页）
@@ -108,6 +109,11 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("文章", id));
 
+        // 保存当前版本（在更新之前）
+        String changeNote = request.getChangeNote() != null ?
+            request.getChangeNote() : "更新文章内容";
+        postVersionService.saveVersion(post, changeNote);
+
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
         post.setSummary(request.getSummary());
@@ -130,6 +136,8 @@ public class PostService {
         if (!postRepository.existsById(id)) {
             throw new ResourceNotFoundException("文章", id);
         }
+        // 删除文章的版本历史
+        postVersionService.deleteVersionHistory(id);
         postRepository.deleteById(id);
     }
 
