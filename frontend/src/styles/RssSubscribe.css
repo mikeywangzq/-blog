@@ -1,0 +1,204 @@
+/* RSS订阅组件样式 */
+.rss-subscribe {
+  background: var(--bg-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #dee2e6);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.rss-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rss-icon {
+  font-size: 24px;
+}
+
+.rss-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-primary, #212529);
+}
+
+.rss-description {
+  color: var(--text-secondary, #6c757d);
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.rss-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.rss-link,
+.rss-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.rss-link {
+  background: var(--primary-color, #007bff);
+  color: white;
+  border: none;
+}
+
+.rss-link:hover {
+  background: var(--primary-hover, #0056b3);
+  transform: translateY(-1px);
+}
+
+.rss-copy-btn {
+  background: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #212529);
+  border: 1px solid var(--border-color, #dee2e6);
+  position: relative;
+}
+
+.rss-copy-btn:hover {
+  background: var(--bg-hover, #f8f9fa);
+  border-color: var(--primary-color, #007bff);
+}
+
+.rss-copy-btn:active {
+  transform: scale(0.98);
+}
+
+.copy-icon {
+  font-size: 16px;
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success-color, #28a745);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+.rss-readers {
+  background: var(--bg-primary, #ffffff);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.readers-title {
+  font-size: 13px;
+  color: var(--text-secondary, #6c757d);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.readers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.readers-list li {
+  display: inline;
+}
+
+.readers-list a {
+  color: var(--link-color, #007bff);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.readers-list a:hover {
+  color: var(--link-hover, #0056b3);
+  text-decoration: underline;
+}
+
+.rss-url-display {
+  background: var(--code-bg, #f4f4f4);
+  border: 1px solid var(--border-color, #dee2e6);
+  border-radius: 4px;
+  padding: 8px 12px;
+  overflow-x: auto;
+}
+
+.rss-url-display code {
+  color: var(--code-color, #e83e8c);
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .rss-subscribe {
+  background: var(--bg-secondary, #2d2d2d);
+  border-color: var(--border-color, #404040);
+}
+
+[data-theme="dark"] .rss-readers {
+  background: var(--bg-primary, #1a1a1a);
+}
+
+[data-theme="dark"] .rss-copy-btn {
+  background: var(--bg-primary, #1a1a1a);
+  border-color: var(--border-color, #404040);
+}
+
+[data-theme="dark"] .rss-copy-btn:hover {
+  background: var(--bg-hover, #2d2d2d);
+}
+
+[data-theme="dark"] .rss-url-display {
+  background: var(--code-bg, #2d2d2d);
+  border-color: var(--border-color, #404040);
+}
+
+/* 响应式设计 */
+@media (max-width: 576px) {
+  .rss-subscribe {
+    padding: 16px;
+  }
+
+  .rss-actions {
+    flex-direction: column;
+  }
+
+  .rss-link,
+  .rss-copy-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .readers-list {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

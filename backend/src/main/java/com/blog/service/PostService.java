@@ -1,5 +1,6 @@
 package com.blog.service;
 
+import com.blog.dto.ArchiveDTO;
 import com.blog.dto.CreatePostRequest;
 import com.blog.dto.PostDTO;
 import com.blog.exception.ResourceNotFoundException;
@@ -39,6 +40,7 @@ public class PostService {
     private final CategoryRepository categoryRepository;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
+    private final PostVersionService postVersionService;
 
     /**
      * 获取所有已发布的文章（分页）
@@ -107,6 +109,11 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("文章", id));
 
+        // 保存当前版本（在更新之前）
+        String changeNote = request.getChangeNote() != null ?
+            request.getChangeNote() : "更新文章内容";
+        postVersionService.saveVersion(post, changeNote);
+
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
         post.setSummary(request.getSummary());
@@ -129,6 +136,8 @@ public class PostService {
         if (!postRepository.existsById(id)) {
             throw new ResourceNotFoundException("文章", id);
         }
+        // 删除文章的版本历史
+        postVersionService.deleteVersionHistory(id);
         postRepository.deleteById(id);
     }
 
@@ -309,5 +318,42 @@ public class PostService {
     public Page<PostDTO> getPostsByTag(Long tagId, Pageable pageable) {
         return postRepository.findByTagIdAndPublishedTrue(tagId, pageable)
                 .map(this::convertToDTO);
+    }
+
+    // ==================== 归档相关方法 ====================
+
+    /**
+     * 获取归档统计（按年月分组）
+     * 返回每个月份的文章数量
+     */
+    @Transactional(readOnly = true)
+    public List<ArchiveDTO> getArchiveStats() {
+        List<Object[]> results = postRepository.getArchiveStats();
+        return results.stream()
+                .map(result -> new ArchiveDTO(
+                        (Integer) result[0],  // year
+                        (Integer) result[1],  // month
+                        (Long) result[2]      // count
+                ))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 获取指定年月的文章列表
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> getPostsByYearMonth(Integer year, Integer month, Pageable pageable) {
+        Page<Post> posts = postRepository.findByYearAndMonth(year, month, pageable);
+
+        List<Long> postIds = posts.getContent().stream()
+                .map(Post::getId)
+                .collect(Collectors.toList());
+
+        Map<Long, Long> commentCounts = getCommentCountsForPosts(postIds);
+        Map<Long, Long> likeCounts = getLikeCountsForPosts(postIds);
+
+        return posts.map(post -> convertToDTO(post,
+                commentCounts.getOrDefault(post.getId(), 0L),
+                likeCounts.getOrDefault(post.getId(), 0L)));
     }
 }

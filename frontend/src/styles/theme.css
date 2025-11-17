@@ -1,0 +1,258 @@
+/* 深色模式样式 */
+
+:root[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-tertiary: #adb5bd;
+  --border-color: #dee2e6;
+  --link-color: #007bff;
+  --link-hover: #0056b3;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+  --code-bg: #f4f4f4;
+  --sidebar-bg: #f8f9fa;
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #e9ecef;
+  --text-secondary: #adb5bd;
+  --text-tertiary: #6c757d;
+  --border-color: #495057;
+  --link-color: #4dabf7;
+  --link-hover: #74c0fc;
+  --card-bg: #2d2d2d;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --input-bg: #3a3a3a;
+  --input-border: #495057;
+  --code-bg: #3a3a3a;
+  --sidebar-bg: #2d2d2d;
+}
+
+/* 全局样式应用 */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px var(--card-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-header,
+.card-footer {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+/* 输入框样式 */
+.form-control,
+.form-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--input-bg);
+  border-color: var(--link-color);
+  color: var(--text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* 链接样式 */
+a {
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* 边框样式 */
+.border,
+hr {
+  border-color: var(--border-color) !important;
+}
+
+/* 文本颜色 */
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* 背景样式 */
+.bg-light {
+  background-color: var(--bg-secondary) !important;
+}
+
+/* 导航栏样式 */
+.header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 列表样式 */
+.list-group-item {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+.list-group-item-action:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* 代码块样式 */
+code,
+pre {
+  background-color: var(--code-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Markdown预览样式 */
+.markdown-preview {
+  color: var(--text-primary);
+}
+
+.markdown-preview code {
+  background-color: var(--code-bg);
+  color: var(--text-primary);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.markdown-preview pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+/* 按钮样式 */
+.btn-outline-secondary {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* 分页样式 */
+.pagination .page-link {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-tertiary);
+}
+
+/* 提醒框样式 */
+.alert {
+  border-color: var(--border-color);
+}
+
+.alert-info {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* 表格样式 */
+table {
+  color: var(--text-primary);
+}
+
+table thead {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+table td,
+table th {
+  border-color: var(--border-color);
+}
+
+/* 模态框样式 */
+.modal-content {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--border-color);
+}
+
+/* 徽章样式 */
+.badge {
+  transition: background-color 0.3s ease;
+}
+
+/* TOC组件样式 */
+.table-of-contents {
+  background-color: var(--sidebar-bg);
+  border-color: var(--border-color);
+}
+
+/* 平滑过渡 */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* 不对某些元素应用过渡 */
+button,
+input,
+select,
+textarea,
+a,
+.btn {
+  transition-property: background-color, border-color, color, opacity, transform;
+}

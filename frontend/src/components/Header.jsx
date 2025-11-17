@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../services/authService';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Header = () => {
                 </Link>
               </>
             )}
+            <ThemeToggle />
           </nav>
         </div>
       </div>

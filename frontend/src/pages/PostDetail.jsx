@@ -8,12 +8,15 @@ import CommentSection from '../components/CommentSection';
 import LikeButton from '../components/LikeButton';
 import FavoriteButton from '../components/FavoriteButton';
 import TableOfContents from '../components/TableOfContents';
+import ShareButtons from '../components/ShareButtons';
+import VersionHistory from '../components/VersionHistory';
 
 const PostDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showVersionHistory, setShowVersionHistory] = useState(false);
   const user = authService.getCurrentUser();
 
   useEffect(() => {
@@ -75,9 +78,22 @@ const PostDetail = () => {
                 >
                   编辑
                 </button>
+                <button
+                  onClick={() => setShowVersionHistory(!showVersionHistory)}
+                  className="btn btn-secondary"
+                  style={{ marginRight: '1rem' }}
+                >
+                  {showVersionHistory ? '隐藏版本历史' : '查看版本历史'}
+                </button>
                 <button onClick={handleDelete} className="btn btn-danger">
                   删除
                 </button>
+              </div>
+            )}
+
+            {showVersionHistory && user && user.id === post.authorId && (
+              <div style={{ marginTop: '1rem', padding: '1rem', background: 'var(--bg-secondary, #f8f9fa)', borderRadius: '8px' }}>
+                <VersionHistory postId={post.id} />
               </div>
             )}
 
@@ -100,6 +116,12 @@ const PostDetail = () => {
               <LikeButton postId={post.id} />
               <FavoriteButton postId={post.id} />
             </div>
+
+            <ShareButtons
+              title={post.title}
+              url={window.location.href}
+              summary={post.summary}
+            />
 
             <CommentSection postId={post.id} />
           </div>

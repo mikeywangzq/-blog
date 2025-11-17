@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { postService } from '../services/postService';
 import { categoryService } from '../services/categoryService';
 import { tagService } from '../services/tagService';
 import MarkdownEditor from '../components/MarkdownEditor';
+import { useAutoSave } from '../hooks/useAutoSave';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const CreatePost = () => {
     categoryId: '',
     published: false,
     tags: '',
+    changeNote: '',
   });
 
   const [categories, setCategories] = useState([]);
@@ -25,6 +27,43 @@ const CreatePost = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [autoSaveEnabled, setAutoSaveEnabled] = useState(true);
+
+  // 自动保存函数
+  const autoSavePost = useCallback(async (data) => {
+    if (!data.title && !data.content) {
+      return; // 空内容不保存
+    }
+
+    const saveData = {
+      ...data,
+      published: false, // 自动保存始终保存为草稿
+      categoryId: data.categoryId ? parseInt(data.categoryId) : null,
+    };
+
+    try {
+      if (isEdit) {
+        await postService.updatePost(id, saveData);
+      } else if (id) {
+        // 如果已经创建了草稿，更新它
+        await postService.updatePost(id, saveData);
+      } else {
+        // 创建新草稿
+        const newPost = await postService.createPost(saveData);
+        // 更新URL为编辑模式，但不刷新页面
+        window.history.replaceState(null, '', `/edit-post/${newPost.id}`);
+      }
+    } catch (error) {
+      console.error('自动保存失败:', error);
+    }
+  }, [isEdit, id]);
+
+  // 使用自动保存hook
+  const { lastSaved, isSaving } = useAutoSave(
+    autoSavePost,
+    autoSaveEnabled ? formData : null,
+    30000 // 30秒自动保存一次
+  );
 
   useEffect(() => {
     loadCategories();
@@ -97,6 +136,8 @@ const CreatePost = () => {
 
       if (isEdit) {
         await postService.updatePost(id, data);
+        // 清空修改备注
+        setFormData(prev => ({ ...prev, changeNote: '' }));
       } else {
         await postService.createPost(data);
       }
@@ -123,7 +164,26 @@ const CreatePost = () => {
 
   return (
     <div className="form-container">
-      <h1>{isEdit ? '编辑文章' : '创建新文章'}</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h1>{isEdit ? '编辑文章' : '创建新文章'}</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+            <input
+              type="checkbox"
+              checked={autoSaveEnabled}
+              onChange={(e) => setAutoSaveEnabled(e.target.checked)}
+              style={{ marginRight: '0.5rem' }}
+            />
+            自动保存
+          </label>
+          {isSaving && <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>保存中...</span>}
+          {!isSaving && lastSaved && (
+            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              上次保存: {lastSaved.toLocaleTimeString('zh-CN')}
+            </span>
+          )}
+        </div>
+      </div>
 
       {error && <div className="error-message">{error}</div>}
 
@@ -234,6 +294,24 @@ const CreatePost = () => {
             </div>
           )}
         </div>
+
+        {isEdit && (
+          <div className="form-group">
+            <label>修改备注（可选）</label>
+            <input
+              type="text"
+              name="changeNote"
+              value={formData.changeNote}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="简要说明本次修改内容..."
+              maxLength={200}
+            />
+            <small className="form-text text-muted">
+              记录本次修改的主要内容，方便后续查看版本历史
+            </small>
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
           <button

@@ -78,3 +78,12 @@ logging:
 file:
   upload-dir: ./uploads
   max-size: 5242880 # 5MB in bytes
+
+# 博客站点配置
+blog:
+  site:
+    url: http://localhost:3000
+    name: 个人博客
+    description: 分享技术与生活的个人博客
+  rss:
+    max-items: 20 # RSS订阅最多显示的文章数
