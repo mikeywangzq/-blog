@@ -1,5 +1,6 @@
 package com.blog.controller;
 
+import com.blog.dto.ArchiveDTO;
 import com.blog.dto.CreatePostRequest;
 import com.blog.dto.PostDTO;
 import com.blog.service.PostService;
@@ -118,5 +119,25 @@ public class PostController {
         String username = authentication.getName();
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "updatedAt"));
         return ResponseEntity.ok(postService.getUserAllPosts(username, pageable));
+    }
+
+    // ==================== 归档相关接口 ====================
+
+    @GetMapping("/archives")
+    @Operation(summary = "获取归档统计")
+    public ResponseEntity<List<ArchiveDTO>> getArchives() {
+        return ResponseEntity.ok(postService.getArchiveStats());
+    }
+
+    @GetMapping("/archives/{year}/{month}")
+    @Operation(summary = "获取指定年月的文章")
+    public ResponseEntity<Page<PostDTO>> getPostsByYearMonth(
+            @PathVariable Integer year,
+            @PathVariable Integer month,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        return ResponseEntity.ok(postService.getPostsByYearMonth(year, month, pageable));
     }
 }

@@ -10,7 +10,9 @@ import UserProfile from './pages/UserProfile';
 import DraftsPage from './pages/DraftsPage';
 import MyFavorites from './pages/MyFavorites';
 import TagPosts from './pages/TagPosts';
+import ArchivePage from './pages/ArchivePage';
 import './styles/App.css';
+import './styles/theme.css';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="/my-drafts" element={<DraftsPage />} />
           <Route path="/my-favorites" element={<MyFavorites />} />
           <Route path="/tags/:tagId" element={<TagPosts />} />
+          <Route path="/archives/:year/:month" element={<ArchivePage />} />
         </Routes>
       </div>
     </Router>

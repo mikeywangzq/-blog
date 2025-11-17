@@ -8,6 +8,7 @@ import CommentSection from '../components/CommentSection';
 import LikeButton from '../components/LikeButton';
 import FavoriteButton from '../components/FavoriteButton';
 import TableOfContents from '../components/TableOfContents';
+import ShareButtons from '../components/ShareButtons';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -100,6 +101,12 @@ const PostDetail = () => {
               <LikeButton postId={post.id} />
               <FavoriteButton postId={post.id} />
             </div>
+
+            <ShareButtons
+              title={post.title}
+              url={window.location.href}
+              summary={post.summary}
+            />
 
             <CommentSection postId={post.id} />
           </div>

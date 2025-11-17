@@ -4,6 +4,7 @@ import { postService } from '../services/postService';
 import PostCard from '../components/PostCard';
 import Pagination from '../components/Pagination';
 import TagCloud from '../components/TagCloud';
+import ArchiveWidget from '../components/ArchiveWidget';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -74,7 +75,7 @@ const Home = () => {
             <h3>热门标签</h3>
             <TagCloud />
           </div>
-          <div className="sidebar">
+          <div className="sidebar" style={{ marginBottom: '2rem' }}>
             <h3>最新文章</h3>
             <ul>
               {recentPosts.map((post) => (
@@ -84,6 +85,7 @@ const Home = () => {
               ))}
             </ul>
           </div>
+          <ArchiveWidget />
         </aside>
       </div>
     </div>

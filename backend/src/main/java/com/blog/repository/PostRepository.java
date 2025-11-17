@@ -56,4 +56,22 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      */
     @Query("SELECT p FROM Post p JOIN p.tagList t WHERE t.id = :tagId AND p.published = true")
     Page<Post> findByTagIdAndPublishedTrue(Long tagId, Pageable pageable);
+
+    // ==================== 归档相关 ====================
+
+    /**
+     * 按年月查询已发布文章
+     */
+    @Query("SELECT p FROM Post p WHERE p.published = true AND " +
+           "YEAR(p.createdAt) = :year AND MONTH(p.createdAt) = :month")
+    Page<Post> findByYearAndMonth(Integer year, Integer month, Pageable pageable);
+
+    /**
+     * 获取归档统计（按年月分组）
+     */
+    @Query("SELECT YEAR(p.createdAt) as year, MONTH(p.createdAt) as month, COUNT(p) as count " +
+           "FROM Post p WHERE p.published = true " +
+           "GROUP BY YEAR(p.createdAt), MONTH(p.createdAt) " +
+           "ORDER BY year DESC, month DESC")
+    List<Object[]> getArchiveStats();
 }

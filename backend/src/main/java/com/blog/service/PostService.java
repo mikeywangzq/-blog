@@ -1,5 +1,6 @@
 package com.blog.service;
 
+import com.blog.dto.ArchiveDTO;
 import com.blog.dto.CreatePostRequest;
 import com.blog.dto.PostDTO;
 import com.blog.exception.ResourceNotFoundException;
@@ -309,5 +310,42 @@ public class PostService {
     public Page<PostDTO> getPostsByTag(Long tagId, Pageable pageable) {
         return postRepository.findByTagIdAndPublishedTrue(tagId, pageable)
                 .map(this::convertToDTO);
+    }
+
+    // ==================== 归档相关方法 ====================
+
+    /**
+     * 获取归档统计（按年月分组）
+     * 返回每个月份的文章数量
+     */
+    @Transactional(readOnly = true)
+    public List<ArchiveDTO> getArchiveStats() {
+        List<Object[]> results = postRepository.getArchiveStats();
+        return results.stream()
+                .map(result -> new ArchiveDTO(
+                        (Integer) result[0],  // year
+                        (Integer) result[1],  // month
+                        (Long) result[2]      // count
+                ))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 获取指定年月的文章列表
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> getPostsByYearMonth(Integer year, Integer month, Pageable pageable) {
+        Page<Post> posts = postRepository.findByYearAndMonth(year, month, pageable);
+
+        List<Long> postIds = posts.getContent().stream()
+                .map(Post::getId)
+                .collect(Collectors.toList());
+
+        Map<Long, Long> commentCounts = getCommentCountsForPosts(postIds);
+        Map<Long, Long> likeCounts = getLikeCountsForPosts(postIds);
+
+        return posts.map(post -> convertToDTO(post,
+                commentCounts.getOrDefault(post.getId(), 0L),
+                likeCounts.getOrDefault(post.getId(), 0L)));
     }
 }
