@@ -26,8 +26,11 @@ const Header = () => {
             {isAuthenticated ? (
               <>
                 <Link to="/create-post">写文章</Link>
-                <span>欢迎, {user?.username}</span>
-                <button onClick={handleLogout} className="btn btn-secondary">
+                <Link to="/my-drafts">我的草稿</Link>
+                <Link to="/my-favorites">我的收藏</Link>
+                <Link to="/profile">个人中心</Link>
+                <span style={{ marginLeft: '1rem' }}>欢迎, {user?.username}</span>
+                <button onClick={handleLogout} className="btn btn-secondary" style={{ marginLeft: '0.5rem' }}>
                   退出
                 </button>
               </>

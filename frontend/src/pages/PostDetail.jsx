@@ -6,6 +6,8 @@ import { authService } from '../services/authService';
 import { formatDate } from '../utils/formatDate';
 import CommentSection from '../components/CommentSection';
 import LikeButton from '../components/LikeButton';
+import FavoriteButton from '../components/FavoriteButton';
+import TableOfContents from '../components/TableOfContents';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -51,47 +53,62 @@ const PostDetail = () => {
   }
 
   return (
-    <div className="container">
-      <div className="post-detail">
-        <h1>{post.title}</h1>
-        <div className="post-meta">
-          <span>作者: {post.authorName}</span>
-          {post.categoryName && <span> · 分类: {post.categoryName}</span>}
-          <span> · {formatDate(post.createdAt)}</span>
-          <span> · 浏览: {post.views}</span>
-        </div>
+    <div className="container mt-4">
+      <div className="row">
+        {/* 主内容区域 */}
+        <div className="col-lg-9">
+          <div className="post-detail">
+            <h1>{post.title}</h1>
+            <div className="post-meta">
+              <span>作者: {post.authorName}</span>
+              {post.categoryName && <span> · 分类: {post.categoryName}</span>}
+              <span> · {formatDate(post.createdAt)}</span>
+              <span> · 浏览: {post.views}</span>
+            </div>
 
-        {user && user.id === post.authorId && (
-          <div style={{ marginTop: '1rem' }}>
-            <button
-              onClick={() => navigate(`/edit-post/${post.id}`)}
-              className="btn btn-primary"
-              style={{ marginRight: '1rem' }}
-            >
-              编辑
-            </button>
-            <button onClick={handleDelete} className="btn btn-danger">
-              删除
-            </button>
+            {user && user.id === post.authorId && (
+              <div style={{ marginTop: '1rem' }}>
+                <button
+                  onClick={() => navigate(`/edit-post/${post.id}`)}
+                  className="btn btn-primary"
+                  style={{ marginRight: '1rem' }}
+                >
+                  编辑
+                </button>
+                <button onClick={handleDelete} className="btn btn-danger">
+                  删除
+                </button>
+              </div>
+            )}
+
+            <div className="post-content markdown-preview" style={{ marginTop: '2rem' }}>
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </div>
+
+            {post.tags && (
+              <div style={{ marginTop: '2rem' }}>
+                <strong>标签: </strong>
+                {post.tags.split(',').map((tag, index) => (
+                  <span key={index} className="badge bg-info ms-1">
+                    {tag.trim()}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div style={{ marginTop: '2rem', padding: '1rem 0', borderTop: '1px solid #eee', display: 'flex', gap: '1rem' }}>
+              <LikeButton postId={post.id} />
+              <FavoriteButton postId={post.id} />
+            </div>
+
+            <CommentSection postId={post.id} />
           </div>
-        )}
-
-        <div className="post-content markdown-preview" style={{ marginTop: '2rem' }}>
-          <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
 
-        {post.tags && (
-          <div style={{ marginTop: '2rem' }}>
-            <strong>标签: </strong>
-            {post.tags}
-          </div>
-        )}
-
-        <div style={{ marginTop: '2rem', padding: '1rem 0', borderTop: '1px solid #eee' }}>
-          <LikeButton postId={post.id} />
+        {/* 右侧目录 */}
+        <div className="col-lg-3 d-none d-lg-block">
+          <TableOfContents content={post.content} />
         </div>
-
-        <CommentSection postId={post.id} />
       </div>
     </div>
   );

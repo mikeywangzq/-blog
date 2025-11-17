@@ -268,9 +268,46 @@ public class PostService {
      * @param post 文章实体
      * @return 文章DTO
      */
-    private PostDTO convertToDTO(Post post) {
+    public PostDTO convertToDTO(Post post) {
         return convertToDTO(post,
                 commentRepository.countByPostIdAndDeletedFalse(post.getId()),
                 likeRepository.countByPostId(post.getId()));
+    }
+
+    // ==================== 草稿相关方法 ====================
+
+    /**
+     * 获取用户的草稿（未发布的文章）
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> getUserDrafts(String username, Pageable pageable) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("用户不存在"));
+
+        return postRepository.findByAuthorIdAndPublishedFalse(user.getId(), pageable)
+                .map(this::convertToDTO);
+    }
+
+    /**
+     * 获取用户的所有文章（包括草稿和已发布）
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> getUserAllPosts(String username, Pageable pageable) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("用户不存在"));
+
+        return postRepository.findByAuthorId(user.getId(), pageable)
+                .map(this::convertToDTO);
+    }
+
+    // ==================== 标签相关方法 ====================
+
+    /**
+     * 根据标签ID获取文章列表
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> getPostsByTag(Long tagId, Pageable pageable) {
+        return postRepository.findByTagIdAndPublishedTrue(tagId, pageable)
+                .map(this::convertToDTO);
     }
 }

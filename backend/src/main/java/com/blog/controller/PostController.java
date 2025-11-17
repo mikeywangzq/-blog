@@ -93,4 +93,30 @@ public class PostController {
     public ResponseEntity<List<PostDTO>> getRecentPosts() {
         return ResponseEntity.ok(postService.getRecentPosts());
     }
+
+    // ==================== 草稿相关接口 ====================
+
+    @GetMapping("/drafts")
+    @Operation(summary = "获取我的草稿")
+    public ResponseEntity<Page<PostDTO>> getMyDrafts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Authentication authentication) {
+
+        String username = authentication.getName();
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "updatedAt"));
+        return ResponseEntity.ok(postService.getUserDrafts(username, pageable));
+    }
+
+    @GetMapping("/my-posts")
+    @Operation(summary = "获取我的所有文章")
+    public ResponseEntity<Page<PostDTO>> getMyAllPosts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Authentication authentication) {
+
+        String username = authentication.getName();
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "updatedAt"));
+        return ResponseEntity.ok(postService.getUserAllPosts(username, pageable));
+    }
 }

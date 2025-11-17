@@ -54,14 +54,24 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // 认证相关接口
                         .requestMatchers("/auth/**").permitAll()
+
+                        // 公开的GET接口
                         .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/comments/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/likes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/tags/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users/{username}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/favorites/post/*/count").permitAll()
+
+                        // 工具和文档
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
+
+                        // 其他所有请求需要认证
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
