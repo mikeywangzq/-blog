@@ -1,55 +1,163 @@
-/* 深色模式样式 */
+/* ========================================
+   现代化主题系统 - 程序员高级感
+   ======================================== */
 
+/* 浅色主题 - 清爽简洁 */
 :root[data-theme="light"] {
+  /* 背景色 - 使用微妙渐变 */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
-  --text-tertiary: #adb5bd;
-  --border-color: #dee2e6;
-  --link-color: #007bff;
-  --link-hover: #0056b3;
+  --bg-secondary: #f7f9fc;
+  --bg-tertiary: #e8edf5;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* 文本色 - 现代化层级 */
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-tertiary: #a0aec0;
+  --text-accent: #667eea;
+
+  /* 边框和分割线 */
+  --border-color: #e2e8f0;
+  --border-light: #edf2f7;
+
+  /* 链接色 - 现代渐变 */
+  --link-color: #667eea;
+  --link-hover: #5a67d8;
+  --link-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* 卡片和容器 */
   --card-bg: #ffffff;
-  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-hover-bg: #fafbfc;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --card-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* 输入框 */
   --input-bg: #ffffff;
-  --input-border: #ced4da;
-  --code-bg: #f4f4f4;
-  --sidebar-bg: #f8f9fa;
+  --input-border: #cbd5e0;
+  --input-focus-border: #667eea;
+  --input-focus-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+
+  /* 代码块 - VS Code Light 风格 */
+  --code-bg: #f6f8fa;
+  --code-border: #e1e4e8;
+  --code-text: #24292e;
+  --code-keyword: #d73a49;
+  --code-string: #032f62;
+  --code-comment: #6a737d;
+  --code-function: #6f42c1;
+
+  /* 特殊效果 */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --backdrop-blur: blur(10px);
+
+  /* 渐变按钮 */
+  --btn-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --btn-gradient-hover: linear-gradient(135deg, #5a67d8 0%, #6b42a3 100%);
+
+  /* 成功/错误色 */
+  --success-color: #48bb78;
+  --error-color: #f56565;
+  --warning-color: #ed8936;
+  --info-color: #4299e1;
 }
 
+/* 深色主题 - 高级赛博朋克风格 */
 :root[data-theme="dark"] {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3a3a3a;
-  --text-primary: #e9ecef;
-  --text-secondary: #adb5bd;
-  --text-tertiary: #6c757d;
-  --border-color: #495057;
-  --link-color: #4dabf7;
-  --link-hover: #74c0fc;
-  --card-bg: #2d2d2d;
-  --card-shadow: rgba(0, 0, 0, 0.3);
-  --input-bg: #3a3a3a;
-  --input-border: #495057;
-  --code-bg: #3a3a3a;
-  --sidebar-bg: #2d2d2d;
+  /* 背景色 - 深邃神秘 */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* 文本色 - 清晰明亮 */
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --text-tertiary: #6e7681;
+  --text-accent: #58a6ff;
+
+  /* 边框和分割线 */
+  --border-color: #30363d;
+  --border-light: #21262d;
+
+  /* 链接色 - 霓虹蓝 */
+  --link-color: #58a6ff;
+  --link-hover: #79c0ff;
+  --link-gradient: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+
+  /* 卡片和容器 - 玻璃态效果 */
+  --card-bg: #161b22;
+  --card-hover-bg: #1c2128;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --card-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+
+  /* 输入框 */
+  --input-bg: #0d1117;
+  --input-border: #30363d;
+  --input-focus-border: #58a6ff;
+  --input-focus-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+
+  /* 代码块 - One Dark Pro 风格 */
+  --code-bg: #1e1e1e;
+  --code-border: #30363d;
+  --code-text: #abb2bf;
+  --code-keyword: #c678dd;
+  --code-string: #98c379;
+  --code-comment: #5c6370;
+  --code-function: #61afef;
+
+  /* 特殊效果 - 玻璃态 */
+  --glass-bg: rgba(22, 27, 34, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --backdrop-blur: blur(10px);
+
+  /* 渐变按钮 */
+  --btn-gradient: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+  --btn-gradient-hover: linear-gradient(135deg, #79c0ff 0%, #b491f5 100%);
+
+  /* 成功/错误色 */
+  --success-color: #3fb950;
+  --error-color: #f85149;
+  --warning-color: #d29922;
+  --info-color: #58a6ff;
 }
 
-/* 全局样式应用 */
+/* ========================================
+   全局样式
+   ======================================== */
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 卡片样式 */
+/* ========================================
+   卡片样式 - 现代化设计
+   ======================================== */
+
 .card {
   background-color: var(--card-bg);
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
   color: var(--text-primary);
-  box-shadow: 0 2px 4px var(--card-shadow);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--link-color);
 }
 
 .card-header,
@@ -58,170 +166,343 @@ body {
   border-color: var(--border-color);
 }
 
-/* 输入框样式 */
+/* 玻璃态卡片效果 */
+.card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+}
+
+/* ========================================
+   输入框样式 - 现代化交互
+   ======================================== */
+
 .form-control,
-.form-select {
+.form-select,
+textarea {
   background-color: var(--input-bg);
-  border-color: var(--input-border);
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
   color: var(--text-primary);
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  padding: 0.625rem 0.875rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9375rem;
 }
 
 .form-control:focus,
-.form-select:focus {
+.form-select:focus,
+textarea:focus {
   background-color: var(--input-bg);
-  border-color: var(--link-color);
+  border-color: var(--input-focus-border);
   color: var(--text-primary);
+  box-shadow: var(--input-focus-shadow);
+  outline: none;
 }
 
-.form-control::placeholder {
+.form-control::placeholder,
+textarea::placeholder {
   color: var(--text-tertiary);
+  opacity: 1;
 }
 
-/* 链接样式 */
+/* ========================================
+   链接样式 - 渐变效果
+   ======================================== */
+
 a {
   color: var(--link-color);
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 a:hover {
   color: var(--link-hover);
 }
 
-/* 边框样式 */
-.border,
-hr {
-  border-color: var(--border-color) !important;
+/* 链接下划线动画 */
+a.link-animated::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: var(--link-gradient);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 文本颜色 */
-.text-muted {
-  color: var(--text-secondary) !important;
+a.link-animated:hover::after {
+  width: 100%;
 }
 
-/* 背景样式 */
-.bg-light {
-  background-color: var(--bg-secondary) !important;
+/* ========================================
+   按钮样式 - 渐变和动画
+   ======================================== */
+
+.btn {
+  border-radius: 8px;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
 }
 
-/* 导航栏样式 */
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* 渐变按钮 */
+.btn-gradient {
+  background: var(--btn-gradient);
+  color: white;
+  border: none;
+}
+
+.btn-gradient:hover {
+  background: var(--btn-gradient-hover);
+  color: white;
+}
+
+.btn-outline-secondary {
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-color);
+  background: transparent;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--link-color);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   代码块样式 - 程序员最爱
+   ======================================== */
+
+code {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.875em;
+  border: 1px solid var(--code-border);
+}
+
+pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  line-height: 1.6;
+  position: relative;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: var(--code-text);
+  display: block;
+}
+
+/* 代码块语法高亮提示 */
+pre::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Markdown 预览代码样式 */
+.markdown-preview code {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-size: 0.875em;
+}
+
+.markdown-preview pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.markdown-preview pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+/* ========================================
+   导航栏样式 - 玻璃态效果
+   ======================================== */
+
 .header {
-  background-color: var(--card-bg);
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 侧边栏样式 */
+/* ========================================
+   侧边栏样式
+   ======================================== */
+
 .sidebar {
-  background-color: var(--sidebar-bg);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 列表样式 */
+.sidebar h3 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* ========================================
+   列表样式
+   ======================================== */
+
 .list-group-item {
   background-color: var(--card-bg);
   border-color: var(--border-color);
   color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .list-group-item:hover {
   background-color: var(--bg-secondary);
+  transform: translateX(4px);
 }
 
 .list-group-item-action:hover {
   background-color: var(--bg-secondary);
 }
 
-/* 代码块样式 */
-code,
-pre {
-  background-color: var(--code-bg);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+/* ========================================
+   分页样式
+   ======================================== */
+
+.pagination {
+  gap: 0.5rem;
 }
 
-/* Markdown预览样式 */
-.markdown-preview {
-  color: var(--text-primary);
-}
-
-.markdown-preview code {
-  background-color: var(--code-bg);
-  color: var(--text-primary);
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-}
-
-.markdown-preview pre {
-  background-color: var(--code-bg);
-  border: 1px solid var(--border-color);
-  padding: 1em;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-/* 按钮样式 */
-.btn-outline-secondary {
-  color: var(--text-secondary);
-  border-color: var(--border-color);
-}
-
-.btn-outline-secondary:hover {
-  background-color: var(--bg-secondary);
-  border-color: var(--border-color);
-  color: var(--text-primary);
-}
-
-/* 分页样式 */
 .pagination .page-link {
   background-color: var(--card-bg);
-  border-color: var(--border-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
   color: var(--text-primary);
+  padding: 0.5rem 0.875rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pagination .page-link:hover {
   background-color: var(--bg-secondary);
-  border-color: var(--border-color);
-  color: var(--text-primary);
+  border-color: var(--link-color);
+  color: var(--link-color);
+  transform: translateY(-1px);
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--btn-gradient);
+  border-color: transparent;
+  color: white;
 }
 
 .pagination .page-item.disabled .page-link {
   background-color: var(--bg-secondary);
   border-color: var(--border-color);
   color: var(--text-tertiary);
+  cursor: not-allowed;
 }
 
-/* 提醒框样式 */
-.alert {
-  border-color: var(--border-color);
+/* ========================================
+   徽章样式 - 现代化标签
+   ======================================== */
+
+.badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.alert-info {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
+.badge:hover {
+  transform: scale(1.05);
 }
 
-/* 表格样式 */
+/* ========================================
+   表格样式
+   ======================================== */
+
 table {
   color: var(--text-primary);
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 table thead {
   background-color: var(--bg-secondary);
+}
+
+table thead th {
   border-color: var(--border-color);
+  font-weight: 600;
+  padding: 0.875rem;
 }
 
 table td,
 table th {
   border-color: var(--border-color);
+  padding: 0.75rem;
 }
 
-/* 模态框样式 */
+table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* ========================================
+   模态框样式
+   ======================================== */
+
 .modal-content {
   background-color: var(--card-bg);
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow-lg);
 }
 
 .modal-header,
@@ -229,30 +510,166 @@ table th {
   border-color: var(--border-color);
 }
 
-/* 徽章样式 */
-.badge {
-  transition: background-color 0.3s ease;
+/* ========================================
+   加载动画
+   ======================================== */
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--link-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-/* TOC组件样式 */
-.table-of-contents {
-  background-color: var(--sidebar-bg);
-  border-color: var(--border-color);
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* 平滑过渡 */
+/* ========================================
+   滚动条样式 - 现代化
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Firefox 滚动条 */
 * {
-  transition-property: background-color, border-color, color;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--bg-primary);
 }
 
-/* 不对某些元素应用过渡 */
-button,
-input,
-select,
-textarea,
-a,
-.btn {
-  transition-property: background-color, border-color, color, opacity, transform;
+/* ========================================
+   选中文本样式
+   ======================================== */
+
+::selection {
+  background-color: var(--link-color);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--link-color);
+  color: white;
+}
+
+/* ========================================
+   工具类
+   ======================================== */
+
+.text-gradient {
+  background: var(--link-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient {
+  border: 2px solid;
+  border-image: var(--link-gradient) 1;
+}
+
+.shadow-sm {
+  box-shadow: var(--card-shadow);
+}
+
+.shadow-md {
+  box-shadow: var(--card-shadow-hover);
+}
+
+.shadow-lg {
+  box-shadow: var(--card-shadow-lg);
+}
+
+/* ========================================
+   动画类
+   ======================================== */
+
+.fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 8px;
+  }
+
+  .sidebar {
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ========================================
+   辅助功能 - 无障碍支持
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 焦点可见性 */
+:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
 }
